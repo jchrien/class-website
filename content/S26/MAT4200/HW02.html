@@ -7,6 +7,8 @@ term: S26
 date: 2026-02-12
 layout: layouts/hw.njk
 ---
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
 <h2>Goals</h2>
 <ul>
   <li>[...]</li>
@@ -16,15 +18,26 @@ layout: layouts/hw.njk
   <li><i>(2026-xx-xx xx:xx)</i>[...]</li>
 </ul> -->
 <hr>
-<h3>Exercise 1 [2]</h3>
-<i>Either save this exercise for last, or do it incrementally as you work on the homework. You may need to add <code>\usepackage{xcolor}</code> to the preamble of your document.</i>
-<ol>
-  <li>
-    Once you have completed the assignment, fill out the following template listing collaborators, tools, and a reflection on each problem you worked on.
-    <pre><code>Collaborators: Alex, Ross, Margaret, Joan
-\\
+<details open>
+  <summary>Exercise 0 [0]</summary>
+  <i>(You don't need to submit anything for this exercise.)</i>
+  <p>
+    On a required exercise on HW3, I'm going to ask you to go to the Maker Studio, get trained on something, and make something. Finding time to get trained can be a little tricky, so this is a heads up that you might want to plan ahead and get trained sooner than later. (This would be a good activity to do with a classmate and claim "Final Choice Exercise" points for collaboration.)
+  </p>
+  <p>
+    If you are not going to be able to get to the Maker Studio within the next two weeks, let me know ASAP so that we can plan an alternative.
+  </p>
+</details>
+<details open>
+  <summary>Exercise 1 [2]</summary>
+  <i>Either save this exercise for last, or do it incrementally as you work on the homework. You may need to add <code>\usepackage{xcolor}</code> to the preamble of your document.</i>
+  <ol>
+    <li>
+      Once you have completed the assignment, fill out the following template listing collaborators, tools, and a reflection on each problem you worked on.
+      <pre><code>Collaborators: Alex, Ross, Margaret, Joan
+
+\noindent
 Tools and resources used: On Exercise 1, I used ChatGPT to help me figure out how to [...]. On Choice Exercise 7, I watched a YouTube video to [...].
-\\
 \begin{enumerate}
   \item[Exercise 1]
     {\color{red} Points attempted: 7}.
@@ -39,25 +52,27 @@ Tools and resources used: On Exercise 1, I used ChatGPT to help me figure out ho
     {\color{green!50!black} Self-assessed score: 3/3}.
     {\color{magenta} Questions/Feedback: How should I be thinking about gradients?}
 \end{enumerate}</code></pre>
-  </li>
-  <li>
-    Choose one or two problems that you would most like feedback on, with a brief note of what you would most like me to focus on. (This could be "mathematical correctness," "grammar," "notation," "formatting," or anything else.)
-  </li>
-</ol>
+    </li>
+    <li>
+      Choose one or two problems that you would most like feedback on, with a brief note of what you would most like me to focus on. (This could be "mathematical correctness," "grammar," "notation," "formatting," or anything else.)
+    </li>
+  </ol>
+</details>
 
-<h3>Exercise 2 [3]</h3>
-<ol>
-  <li>
-    Install <a href="https://openscad.org/">OpenSCAD</a> (or reach out if you cannot).
-  </li>
-  <li>
-    Run the following code. <pre><code>color("red") {
-  cylinder(20,4,4);
-  translate([3.5,0,0]) cube([15,8,8],center=true);
-  translate([-1,6,16]) linear_extrude(height = 3) text("p");
+<details open>
+  <summary>Exercise 2 [3]</summary>
+  <ol>
+    <li>
+      Install <a href="https://openscad.org/">OpenSCAD</a>.
+    </li>
+    <li>
+      Run the following code. <pre><code>color("red") {
+    cylinder(20,4,4);
+    translate([3.5,0,0]) cube([15,8,8],center=true);
+    translate([-1,2,16]) linear_extrude(height = 3) text("r");
 }</code></pre> Figure out how to make it display, rotate it around, zoom in, zoom out, etc. Describe it in words.
-  </li>
-    Beneath that add this code, which will create some objects in blue defined by taking every single red point, and multiplying it by a matrix whose columns all have norm 1 and are orthogonal to each other. (Matrices with this property define the <em>orthogonal group</em> $O(3)$.) <pre><code>color("blue")
+    </li>
+      Beneath that add this code, which will create some objects in blue defined by taking every single red point, and multiplying it by a matrix whose columns all have norm 1 and are orthogonal to each other. (Matrices with this property define the <em>orthogonal group</em> $O(3)$.) <pre><code>color("blue")
 multmatrix([
     [-0.707107, 0.408, 0.57735],
     [ 0.707107, 0.408, 0.57735],
@@ -65,171 +80,361 @@ multmatrix([
 ]) {
     cylinder(20,4,4);
     translate([3.5,0,0]) cube([15,8,8],center=true);
-    translate([-1,6,16]) linear_extrude(height = 3) text("p");
-}</code></pre> Describe in words what the matrix has done. In particular, what happened to the "p"?
-  <li>
-    Now, we're going to make a green piece which consists of the same pattern, with the cylinder rotated in the direction $(-1, -2, -3)$. <pre><code>color("green")
-multmatrix([
-    [a11, a12, a13],
-    [a21, a22, a23],
-    [a31, a22, a33]
-]) {
-    cylinder(20,4,4);
-    translate([3.5,0,0]) cube([15,8,8],center=true);
-    translate([-1,6,16]) linear_extrude(height = 3) text("p");
-}</code></pre> The original cylinder points in the direction (0,0,1), so change the appropriate column of the matrix to rotate $(0,0,1)$ in the (unit) direction $(-1, -2, -3)$. Now choose another column of the matrix, and replace it with any unit vector which is orthogonal to the one you just found. Lastly, replace the last unit vector with any unit vector which is orthogonal to both.
-  </li>
-  <li>
-    Now play around in OpenSCAD for at least ten minutes. Make something that you might want to 3D print. Export it as an STL file, and post the file together with a screenshot to the <code>#hw-prompts</code> Discord channel, and let us know any tools you used to generate the code.
-  </li>
-</ol>
+    translate([-1,2,16]) linear_extrude(height = 3) text("r");
+}</code></pre> Describe in words what the matrix has done. In particular, what happened to the "r"?
+    </li>
+    <li>
+      Now play around in OpenSCAD for at least ten minutes. Make something that you might want to 3D print. Export it as an STL file, and post the file together with a screenshot to the <code>#hw-prompts</code> Discord channel, and let us know if you used any tools/resources to generate the code.
+    </li>
+  </ol>
+</details>
 
-<h3>Exercise 3 [6]</h3>
-Recall that my Christmas tree was about $7$ feet tall and $4$ feet in diameter at the base. Parameterize the tree, and plot it in Mathematica.
-<ol>
-  <li>
-    Set up an integral to compute the surface area of the tree.
-  </li>
-  <li>
-    It's easier to see ornaments near the front of the tree, so naturally, I have a higher density of ornaments there. Suppose that the density of ornaments is modeled by $4(\theta - \pi)^2$ ornaments per square foot, where $\theta$ is the angle from the front of the tree.
-    <ol>
-      <li>"<a href="https://www.youtube.com/embed/SXHHvoaSctc?si=b4zd11HEB14VsJEs&amp;start=207">The zeroth lesson in mathematics is you should always begin by guessing!</a>"<a id="ref-1" href="#label-1"><sup>1</sup></a> Imagine a tree of the size described, and then imagine four ornaments per square foot at the front. What would you <i>guess</i> is the number of ornaments on the tree?</li>
+<details open>
+  <summary>Exercise 3 [7]</summary>
+  <div class="grid" style="grid-template-columns: 0.75fr 0.25fr;">
+    <div>
+      Recall that we have been modeling my Christmas tree in class, which we've been describing as a cone that is $7$ feet tall and $4$ feet in diameter at the base. In particular, we used the parameterization \[
+        \mathbf{c}(\theta, h) = \begin{pmatrix}
+          \frac{2}{7}(7-h) \cos (\theta ) \\
+          \frac{2}{7}(7-h) \sin (\theta ) \\
+          h
+        \end{pmatrix},\,\theta \in [0, 2\pi],\,h \in [0,7]
+      \]
+    </div>
+    <div>
+      <img src="/assets/S26/MAT4200/HW02/ChristmasTree.png">
+    </div>
+  </div>
+  <ol>
+    <li>
+      Plot the tree in Mathematica with the following code, noting that I have renamed $\theta$ to $t$. <pre><code>ParametricPlot3D[{2/7 (7 - h) Cos[t], 2/7 (7 - h) Sin[t], h}, {t, 0, 2 Pi}, {h, 0, 7}, PlotStyle -> Green]</code></pre>
+      Save the image as a PNG, and include it in your write-up.
+    </li>
+    <li>
+      Now we're going to add some ornaments to the tree. Save your plot of the tree as a variable by prepending <code>treePlot =</code> before <code>ParametricPlot3D</code>. Next we're going to make some ornaments named <code>ornament1</code>, <code>ornament2</code>, etc. to place on the tree. To make the ornament, use code like this
+      <pre><code>ornament1 = Graphics3D[{Red, Sphere[{1, 0, 3.5}, 0.2]}];</code></pre> which makes a red ornament at $(1,0,3.5)$ with a radius of $0.2$. Make a few more ornaments with different colors, positions, and radii, and place them on the tree with
+      <pre><code>Show[treePlot, ornament1, ..., ornament4]</code></pre>
+      Save the image as a PNG, and include it in your write-up.
+    </li>
+    <li>
+      By hand or with Mathematica, set up an integral to compute the surface area of the tree. Evaluate the integral by hand with a computer and report your answer as a decimal. (In Mathematica you can numerically integrate a function with <code>NIntegrate</code>.)
+    </li>
+    <li>
+      Since I can't see ornaments at the back of my tree, I only place the ugly ones back there, and I have a higher density of ornaments at the front. We will model the density of ornaments by $4\frac{(\theta - \pi)^2}{\pi^2}$ ornaments per square foot, where $\theta$ is the angle from the front of the tree.
+      <ol>
+        <li>"<a href="https://www.youtube.com/embed/SXHHvoaSctc?si=b4zd11HEB14VsJEs&amp;start=207">The zeroth lesson in mathematics is you should always begin by guessing!</a>"<a id="ref-1" href="#label-1"><sup>1</sup></a> Imagine a tree of the size described, and then imagine four ornaments per square foot at the front. What would you <i>guess</i> is the number of ornaments on the tree?</li>
+        <li>
+          Set up an integral to compute the number of ornaments on the tree according to this model. Could this possibly be the number of ornaments I actually had on my tree?
+        </li>
+        <li>
+          How many ornaments do I have in the $90^\circ$ wedge centered at the front of the tree versus the $90^\circ$ wedge centered at the back?
+        </li>
+      </ol>
       <li>
-        Set up an integral to compute the number of ornaments on the tree according to this model. Could this possibly be the number of ornaments I actually had on my tree?
+        Now it's time to string the lights spiraling around the tree! If I want the lights spaced six inches apart between every full turn, what's a parametric equation for the lights? Plot this on the tree as a parametric curve with <code>ParametricPlot3D</code> and include an image.
       </li>
       <li>
-        How many ornaments do I have in the $90^\circ$ wedge centered at the front of the tree versus the $90^\circ$ wedge centered at the back?
+        What is the length of the spiral of lights?
       </li>
       <li>
-        If I want string lights to spiral around the tree, spaced six inches apart between every full turn, what's the length of the lights that I need to buy?
+        If I have 90 feet of lights, how far apart should I space each rotation around the tree if I want to space them evenly?
       </li>
-      <li>
-        If I have 90 feet of lights, how far should I space them apart if I want to space them evenly?
-      </li>
-    </ol>
-  </li>
-</ol>
+    </li>
+  </ol>
+</details>
 
 <h2>Choice Exercises</h2>
-<p><i>Do 10 points of the following.</i></p>
+<p><i>Do 8 points of the following. (More problems will be added shortly.)</i></p>
 
-<h3>Exercise []</h3>
-<ol>
-  <li>
-    Volume of a tetrahedron with single integral (slicing)
-  </li>
-  <li>
-    Volume of a tetrahedron with double integral over $1/6$ of base (fundamental domain).
-  </li>
-  <li>
-    Here's a geometric way we can compute the same value.
-    <ol>
-      <li>Compute ratio of volume of octahedron to tetrahedron.</li>
-      <li>
-        Compute 2tet + oct via the determinant of \[
-          \begin{bmatrix}
-            0 & 1 & 1 \\
-            1 & 0 & 1 \\
-            1 & 1 & 0 \\
-          \end{bmatrix}
-        \]
-      </li>
-    </ol>
-  </li>
-</ol>
+<details open>
+  <summary>Choice Exercise 4 [≤8]</summary>
+  <p>In this exercise, you are going to compute the volume of a regular unit tetrahedron in four different ways. You can do any subset of parts, but you have to do part 1.</p>
+  <ol>
+    <li>
+      Start by <em>guessing</em> what you think the volume will be, and write your guess as a decimal.
+    </li>
+    <li>[1]
+      Around 225 BCE, Archimedes discovered that a "pyramid" is three times the volume of a a cone with the same base and height.
+      <ol>
+        <li>
+          What is the area $A$ of an equilateral triangle with side lengths of $1$?
+        </li>
+        <li>
+          What is the height $h$ of a unit tetrahedron? (i.e. what is the height of the tetrahedron if you set it down on a table with a triangular face down?)
+        </li>
+        <li>
+          What is the volume of a triangular prism with base $A$ and height $h$?
+        </li>
+        <li>
+          What does Archimedes conclude that the volume of a regular tetrahedron is iin this case?
+        </li>
+      </ol>
+    </li>
+    <li>[2]
+      Now we compute the volume of a tetrahedron by slicing, taking an integral from $z = 0$ to $z = h$, where $h$ is computed above.
+      <ol>
+        <li>
+          What is the area of the cross-section at the base when $z = 0$?
+          When $z = h$?
+          What's the formula for the area given arbitrary $z \in [0,h]$?
+        </li>
+        <li>
+          Set up and evaluate the area over the height. (Don't use a computer for this one.) Is this the same as what you got above?
+        </li>
+      </ol>
+    </li>
+    <li>[2]
+      Next we're going to figure out the volume by doing a double-integral over the base.
+      First start by noticing that we place the tetrahedron on the plane, and it up into six regions of equal volume, such that each region is bounded above by a plane. Here's a 3D model where we're looking at the base.
+      <div class="viewer">
+        <model-viewer
+          camera-controls disable-zoom
+          camera-orbit="180deg 90deg auto"
+          alt="two tetrahedra"
+          src="/assets/S26/MAT4200/HW02/tetrahedron_six_regions.glb"
+        ></model-viewer>
+      </div>
+      <ol>
+        <li>
+          Let's start by describing the base of the tetrahedron, which is the unit triangle in the $xy$-plane. Place a vertex at $(0,0)$ and another at $(1,0)$. Where does the third vertex of the triangle go? Where it the center of the triangle?
+        </li>
+        <li>
+          Now we're going to cut up the triangle into sixths, as illustrated on the base of the tetrahedron above. Let's choose the sub-triangle consisting of $(0,0)$, $(1/2,0)$ and the center of the triangle. What is the function describing the line segment from the origin to the center, and what is its domain?
+        </li>
+        <li>
+          Next we will describe the plane (in $\mathbb{R}^3$) above that region of the base. To determine a plane, we just need three points on the plane. Find the "top" of the tetrahedron in $\mathbb{R}^3$ and use this to describe the plane in the form \[
+            z = Ax + By + C.
+          \]
+        </li>
+        <li>
+          Now we're ready to set up a double integral to compute the volume of the tetrahedron, which we will do by scaling our region by $6$: \[
+            \operatorname{Vol}(\mathrm{tet}) = 6\iint_R f(x,y) dA = 6\int_{x = 0}^\square \int_{y = 0}^{y = \square} \square\, dy\, dx.
+          \]
+          Set up and compute the integral by hand.
+        </li>
+      </ol>
+    </li>
+    <li>[3]
+      Lastly, we're compute the volume of the tetrahedra my <em>favorite</em> way using a couple tricks.
+      <ol>
+        <li>
+          If we take the tetrahedron and scale it by a factor of two, then the volume of the scaled tetrahedron is how many times bigger than the unit tetrahedron?
+        </li>
+        <li>
+          Notice that we cut up the tetrahedron with side-length $2$ into four unit tetrahedra with the center shape left over. What are the side lengths of the center piece? Look up the name of this shape, which we will call $\mathcal{O}$, which is one of the five Platonic solids.
+          <div class="viewer">
+            <model-viewer
+              camera-controls disable-zoom
+              alt="two tetrahedra"
+              src="/assets/S26/MAT4200/HW02/tet_oct.glb"
+            ></model-viewer>
+          </div>
+        </li>
+        <li>
+          Use the above to parts to determine the ratio of the volume of the unit tetrahedron to the volume of $\mathcal{O}$.
+        </li>
+        <li>
+          Notice that we can make a parallelepiped out of $\mathcal{O}$ and two unit tetrahedra. And recall that the volume of a parallelepiped corresponds to the determinant of a matrix.
+          <div class="viewer">
+            <model-viewer
+              camera-controls disable-zoom
+              alt="two tetrahedra"
+              src="/assets/S26/MAT4200/HW02/tet_oct_parallelepiped.glb"
+            ></model-viewer>
+          </div>
+          Set up the corresponding matrix and compute it's determinant. Now use the ideas above to determine the volume of a tetrahedron.
+        </li>
+      </ol>
+    </li>
+  </ol>
+</details>
 
-<h3>
-  Exercise []
-</h3>
-<p>
-  In this exercise, you will estimate $\pi$ using cubic Bézier curve to approximate the unit circular arc in the first quadrant. Recall that in class, we estimated $\pi$ with the quadratic Bézier curve \[
-    \mathbf{c}(t) =
-    (1-t)^2 \begin{pmatrix}1 \\ 0\end{pmatrix} +
-    2t(1-t) \begin{pmatrix}1 \\ 1\end{pmatrix} +
-    t^2 \begin{pmatrix}0 \\ 1\end{pmatrix}
-  \] and we found that \[
-    \pi \approx 2 \int_{t=0}^1 \sqrt{8 (t-1) t+4} dt
-  \]
-</p>
-<ol>
-  <li>
-    Use Mathematica to plot this curve:
-    <pre><code>ParametricPlot[{(1 - t)^2 {1, 0} + 2 t (1 - t) {1, 1} + t^2 {0, 1}}, {t, 0, 1}]</code></pre>
-    Write a guess of what you think will happen if you extend the domain from $t \in [0,1]$ to $t \in [-1,2]$. Now edit the code to change the domain and say what actually happened. Right click to save either (or both) plots as an image, and include them in your writeup with the $\LaTeX$ command <code>\includegraphics[width=\textwidth]{path/to/image.png}</code>.
-  </li>
-  <li>
-    Use Mathematica to compute this integral with
-    <pre><code>2*Integrate[Sqrt[4+8(-1+t)t],{t,0,1}]</code></pre>
-    Highlight the output, and select <code>Copy As > LaTeX</code>, and paste it here.
-  </li>
-  <li>
-    Wrap the whole expression in an <code>N[...]</code>, to get a numerical approximation of the value. Paste that here too. What estimate of $\pi$ does this give?
-  </li>
-  <li>
-    Now we'll do the same thing, but with a cubic Bézier curve. Figure out which values of $\ell$ make the curve with control points
-    $\mathbf{v}_1 = (1,0)$,
-    $\mathbf{v}_2 = (1,\ell)$,
-    $\mathbf{v}_3 = (\ell,1)$, and
-    $\mathbf{v}_4 = (0,1)$
-    go through the point $(\sqrt{2}/2,\sqrt{2}/2)$. Include a plot of the resulting Bézier curve, and state the resulting numerical estimate for $\pi$ that this gives?
-  </li>
-  <li>
-    <i>You can do the following for extra credit. In parts (b) and (c), this is an open question, as far as I can tell&mdash;but it's the sort of question that's open because nobody has thought to look it yet, not because it's necessarily especially difficult. It would make for a wonderful paper in this class, that might even be publishable in an academic journal.</i>
-    <ol>
-      <li>
-        The cubic Bézier curve approximation that you found in the above part is actually <em>not</em> the best approximation of the quarter circle in a particular sense. We might say the best approximation of the quarter circle is the one where $|\mathbf{c}(t)|$ is "closest" to $1$, as measured by the min/max: We want to minimize the maximal value of $\big||\mathbf{c}(t)|-1\big|$ over all inputs $t \in [0,1]$. Find the value of $\ell$ that does this, and give it's approximation for $\pi$.
-      </li>
-      <li>
-        What are the values of $\alpha$, $\beta$, and $\gamma$ if you want to min/max with control points $\mathbf{v}_1 = (\alpha,0)$,
-        $\mathbf{v}_2 = (\beta,\gamma)$,
-        $\mathbf{v}_3 = (\gamma,\beta)$, and
-        $\mathbf{v}_4 = (0,\alpha)$.
-      </li>
-      <li>
-        What the the control points if we want the best approximation for a degree-$4$ Bézier curve?
-      </li>
-    </ol>
-  </li>
-</ol>
+<details open>
+  <summary>Choice Exercise 5 [3]</summary>
+  <p>
+    Suppose that there is a wire that spirals along a cone of height $2$ and a base of radius $1$ defined by the function $\boldsymbol{g}\colon[0,2] \rightarrow \mathbb{R}^3$, where \[
+      \boldsymbol{g}(h) = ((h/2)\cos(10\pi h),(h/2)\sin(10\pi h), 2-h).
+    \]
+    (Notice that $h$ is the vertical distance from the top of the cone.)
+  </p>
+  <p>
+    We make some measurements of the temperature at various places in the room, and produce a quadratic model for the temperature that best fits the data near the track:
+    \[\begin{align*}
+      T(x,y,z) = 2.1x^2 - 3.2xy + 0.3xz -2.4y^2 + 2.0yz \\
+      + 0.9z^2 + 6.7 x + 3.6 y - 0.55 z + 105.1.
+    \end{align*}\]
+  </p>
+  <ol>
+    <li>
+      Compute the Jacobian matrix $d\boldsymbol{g}(h)$ and evaluate it at $h = 0.5$.
+      <br>
+      Compute the Jacobian matrix $dT(x,y,z)$ and evaluate it at $(x,y,z) = \boldsymbol{g}(0.5)$.
+    </li>
+    <li>
+      Do the matrix multiplication to compute the derivative $(\boldsymbol{g} \circ T)'(0.5)$. Write what this means in words.
+    </li>
+    <li>
+      The temperature is approximately $104.644$ at $h = 0.5$. Use the linear approximation to estimate for which value of $h$ the temperature is $105$.
+    </li>
+    <li>
+      You <i>could</i> compose the functions together and take the derivative, but you really don't want to do this. Start a stopwatch, stop the moment you have both (a) gotten the hang of this approach and (b) feel a deep love and appreciation for the multivariable chain rule. Look at your stopwatch and record how long this emotional journey took you.
+    </li>
+  </ol>
+</details>
 
-<h3>Exercise []</h3>
-Read about the open problem called the <a href="https://en.wikipedia.org/wiki/Jacobian_conjecture">Jacobian_conjecture</a>. Without using the internet (except to reference our class materials) give an example in $\mathbb{R}^2$ that satisfies the conject.
+<details open>
+  <summary>Choice Exercise 6 [3]</summary>
+  <p>
+    In this exercise you will work to understand an open problem in mathematics called the <a href="https://en.wikipedia.org/wiki/Jacobian_conjecture">Jacobian_conjecture</a>.
+  </p>
+  <ol>
+    <li>
+      Spend 10 minutes reading the Wikipedia article above, and do your best to write the conjecture in your own words.
+    </li>
+    <li>
+      Construct an example in $\mathbb{R}^2$ that satisfies the conditions of the Jacobian conjecture, and explain why it is <i>not</i> a counterexample to the conjecture
+    </li>
+  </ol>
+</details>
 
-<h3>Exercise []</h3>
-Compute the (hyper)-volume of a (hyper) sphere inductively (with $n$-tuple integrals?)
+<details open>
+  <summary>Choice Exercise 7 [3]</summary>
+  <p>
+    In this exercise, you will compute the percentage of the earth's interior that lies on a line segment starting in the arctic circle and ending in the antarctic circle.
+  </p>
+  <ol>
+    <li>
+      Start by guessing! First, just using your geographic intuition, report your guess of the percentage of the interior of the earth in this region. Then reveal the following image, and report a new guess.
+      <details>
+        <summary>Click to reveal image</summary>
+        <img src="/assets/S26/MAT4200/HW02/Earth_Core.png">
+      </details>
+    </li>
+    <li>
+      Set up a triple integral in spherical, cylindrical, or Cartesian coordinates using the fact that the arctic circle is at $66^\circ 33'$, read "66 degrees and 33 minutes." (A minute is $1/60$th of a degree&mdash;just like how in timekeeping, a minute is $1/60$th of an hour.)
+    </li>
+  </ol>
+</details>
 
-<h3>Exercise []</h3>
-Compute the volume of the interior of earth that lies on a line segment starting in the arctic circle and ending in the antarctic circle.
+<details open>
+  <summary>Choice Exercise 8 [2 + 2 + 8 + 10 + 10]</summary>
+  <p>
+    In this exercise, you will estimate $\pi$ using cubic Bézier curve to approximate the unit circular arc in the first quadrant. Recall that in class, we estimated $\pi$ with the quadratic Bézier curve \[
+      \mathbf{c}(t) =
+      (1-t)^2 \begin{pmatrix}1 \\ 0\end{pmatrix} +
+      2t(1-t) \begin{pmatrix}1 \\ 1\end{pmatrix} +
+      t^2 \begin{pmatrix}0 \\ 1\end{pmatrix}
+    \] and we found that \[
+      \pi \approx 2 \int_{t=0}^1 \sqrt{8 (t-1) t+4}\,dt
+    \]
+  </p>
+  <ol>
+    <li>[2]
+      We'll start by reviewing what we did in class.
+      <ol>
+        <li>
+          Use Mathematica to plot this curve:
+          <pre><code>ParametricPlot[{(1 - t)^2 {1, 0} + 2 t (1 - t) {1, 1} + t^2 {0, 1}}, {t, 0, 1}]</code></pre>
+          Write a guess of what you think will happen if you extend the domain from $t \in [0,1]$ to $t \in [-1,2]$. Now edit the code to change the domain and say what actually happened. Right click to save either (or both) plots as an image, and include them in your writeup with the $\LaTeX$ command <code>\includegraphics[width=\textwidth]{path/to/image.png}</code>.
+        </li>
+        <li>
+          Use Mathematica to compute this integral with
+          <pre><code>2*Integrate[Sqrt[4+8(-1+t)t],{t,0,1}]</code></pre>
+          Highlight the output, and select <code>Copy As > LaTeX</code>, and paste it here.
+        </li>
+        <li>
+          Wrap the whole expression in an <code>N[...]</code>, to get a numerical approximation of the value. Paste that here too. What estimate of $\pi$ does this give?
+        </li>
+      </ol>
+    </li>
+    <li>[2]
+      Now we'll do the same thing, but with a cubic Bézier curve. Figure out which values of $\ell$ make the curve with control points
+      $\mathbf{v}_1 = (1,0)$,
+      $\mathbf{v}_2 = (1,\ell)$,
+      $\mathbf{v}_3 = (\ell,1)$, and
+      $\mathbf{v}_4 = (0,1)$
+      go through the point $(\sqrt{2}/2,\sqrt{2}/2)$. Include a plot of the resulting Bézier curve, and state the resulting numerical estimate for $\pi$ that this gives?
+    </li>
+    <li>[8]
+      The cubic Bézier curve approximation that you found in the above part is actually <em>not</em> the best approximation of the quarter circle in a particular sense. We might say the best approximation of the quarter circle is the one where $|\mathbf{c}(t)|$ is "closest" to $1$, as measured by the min/max: We want to minimize the maximal value of $\big|(|\mathbf{c}(t)|-1)\big|$ over all inputs $t \in [0,1]$. Find the value of $\ell$ that does this, and give it's approximation for $\pi$.
+      <br>
+      Is this the same as if we want to minimize the maximal value of $(\mathbf{c}(t)|-1)^2$?
+    </li>
+    <li>[10 + 10]
+      <i>
+        You can do the following for credit on future assignments. As far as I know, these are all open questions. However, they are the sorts of questions that are open because nobody has thought to look them yet, not because they are necessarily especially difficult. It would make for a wonderful paper in this class, that might even be publishable in an academic journal. However, these questions are deliberately a bit vague as stated, and so come chat with me if you are planning to attempt them.
+      </i>
+      <ol>
+        <li>[10]
+          Suppose we just want to estimate the circle and we don't need the tangent vectors to be correct at the boundaries. What are the values of $\alpha$, $\beta$, and $\gamma$ if you want to do the same min/max with control points
+          $\mathbf{v}_1 = (\alpha,0)$,
+          $\mathbf{v}_2 = (\beta,\gamma)$,
+          $\mathbf{v}_3 = (\gamma,\beta)$, and
+          $\mathbf{v}_4 = (0,\alpha)$.
+        </li>
+        <li>[10]
+          What are the control points if we want the best approximation for a degree-$4$ Bézier curve? Degree-$5$? Degree-$10$?
+        </li>
+      </ol>
+    </li>
+  </ol>
+</details>
 
+<!-- <details open>
+  <summary>Exercise [3]</summary>
+  <p>
+    When describing points on the unit sphere, we often use spherical coordinates, which is a <i>map</i> $s\colon R \to \mathbb{R}^3$, where $R$ is the region
+    \[
+      R = [0,\infty) \times [0,2\pi) \times [0, \pi].
+    \]
+    The map is defined as \[
+        \begin{pmatrix}\rho\\\theta\\\phi\end{pmatrix} \mapsto \begin{pmatrix}\rho\cos(\theta)\sin(\phi) \\
+        \rho\sin(\theta)\sin(\phi) \\
+        \rho\cos(\phi)
+      \end{pmatrix}
+    \]
+  </p>
+  <ol>
+    <li>
+      We can draw on the unit circle with function composition. Start by describing a parametric curve $\mathbf{c}: [0,1] \to [0,2\pi) \times [0, \pi]$, which takes in values in the "time" interval $[0,1]$ and outputs points in the rectangle.
+    </li>
+  </ol>
+</details> -->
 
-<h3>Exercise x [0]</h3>
-Reading
+<!--
+<details open>
+  <summary>Exercise []</summary>
+  <p>
+    Compute the (hyper)-volume of a (hyper) sphere inductively (with $n$-tuple integrals?)
+  </p>
+</details>
 
-<h3>Choice Exercise x [0]</h3>
-[Easy/drill]
-Chain rule computation?
+<details open>
+  <summary>Exercise x [0]</summary>
+  Reading
+</details>
 
-<h3>Choice Exercise x [0]</h3>
-In Mathematica or Python, draw the region between two spirals, and "cross-hatch" it somehow.
+<details open>
+  <summary>Choice Exercise x [0]</summary>
+  [Easy/drill]
+  Chain rule computation?
+</details>
+-->
 
-<h3>Choice Exercise x [0]</h3>
-Maker Studio/modeling
-
-<h3>Choice Exercise x [0]</h3>
-Challenging/hard
-
-<h3>Final Choice Exercise [≤7]</h3>
-<i>Do any subset of the following parts, state which you did and how many points you are claiming for this problem</i>
-<ol>
-  <li>[≤3] Email Prof Kagey (pkagey@cpp.edu) or post in the <code>#feedback</code> channel on Discord with a typo that you have spotted in this assignment or with a suggestion about how to make something clearer. (One point for every six minutes that the typo got you stuck, with a maximum of three points.)</li>
-  <li>[≤2] Ask a question on Discord. (One point per question, up to 2.)</li>
-  <li>[≤4] Answer a classmate's question on Discord or give a hint about a problem on this week's assignment.<a id="ref-asterisk" href="#label-asterisk"><sup>*</sup></a> (Two points per answer/hint, up to 4.)</li>
-  <li>[≤4] Can you generalize any of the above problems in an interesting way? If so say what the generalization is, attempt to solve it, say something about it, and say how many points you feel like your effort was worth, up to 4.</li>
-  <li>[≤4] Choose one or more problems from our textbook or a previous homework assignment which interest you and write the problem statement along with an answer. Say how many points you feel like your effort was worth, up to 4.</li>
-  <li>[2] Stop by student drop-in hours.</li>
-  <li>[2 or 5] Work on at least one of the above exercises with a classmate. State which classmate you worked with and which exercises you collaborated on. If you've collaborated with someone for the first time, you get 5 points, if you've collaborated with someone before, you get 2 points for working with them again.</li>
-  <li>[2] Turn in the assignment on time (without requesting an extension).</li>
-</ol>
+<details open>
+  <summary>Final Choice Exercise [≤7]</summary>
+  <i>Do any subset of the following parts, state which you did and how many points you are claiming for this problem</i>
+  <ol>
+    <li>[≤3] Email Prof Kagey (pkagey@cpp.edu) or post in the <code>#feedback</code> channel on Discord with a typo that you have spotted in this assignment or with a suggestion about how to make something clearer. (One point for every six minutes that the typo got you stuck, with a maximum of three points.)</li>
+    <li>[≤2] Ask a question on Discord. (One point per question, up to 2.)</li>
+    <li>[≤4] Answer a classmate's question on Discord or give a hint about a problem on this week's assignment.<a id="ref-asterisk" href="#label-asterisk"><sup>*</sup></a> (Two points per answer/hint, up to 4.)</li>
+    <li>[≤4] Can you generalize any of the above problems in an interesting way? If so say what the generalization is, attempt to solve it, say something about it, and say how many points you feel like your effort was worth, up to 4.</li>
+    <li>[≤4] Choose one or more problems from our textbook or a previous homework assignment which interest you and write the problem statement along with an answer. Say how many points you feel like your effort was worth, up to 4.</li>
+    <li>[2] Stop by student drop-in hours.</li>
+    <li>[2 or 5] Work on at least one of the above exercises with a classmate. State which classmate you worked with and which exercises you collaborated on. If you've collaborated with someone for the first time, you get 5 points, if you've collaborated with someone before, you get 2 points for working with them again.</li>
+    <li>[2] Turn in the assignment on time (without requesting an extension).</li>
+  </ol>
+</details>
 
 <hr>
 <ol class="footnotes">
